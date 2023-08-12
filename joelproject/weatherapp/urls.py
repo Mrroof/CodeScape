@@ -1,7 +1,6 @@
-# urls.py
 from django.urls import path
-from . import views
+from . import views 
 
 urlpatterns = [
-    path('get_weather/<str:location>/', views.get_weather, name='get_weather'),
+    path('get weather/', views.get_weather, name = 'get_weather'),
 ]
