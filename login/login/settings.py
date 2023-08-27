@@ -125,7 +125,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
-STATIC_URL - '/static/'
+STATIC_URL = '/static/'
 
 MEDIA_ROOT= '/media/'
 
@@ -138,3 +138,10 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER= "rulej31@gmail.com"
 EMAIL_HOST_PASSWORD = "armadillo"
+
+
+
+
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
