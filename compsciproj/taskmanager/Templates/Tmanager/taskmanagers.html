@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <h1>Task List</h1>
+    
+    <input type="text" id="new-task" placeholder="New Task">
+    <button id="add-button">Add</button>
+    
+    <ul id="incomplete-tasks">
+        {% for task in incomplete_tasks %}
+            <li>
+                <input type="checkbox">
+                <label>{{ task }}</label>
+                <input type="text">
+                <button class="edit">Edit</button>
+                <button class="delete">Delete</button>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <ul id="completed-tasks">
+        {% for task in completed_tasks %}
+            <li>
+                <input type="checkbox" checked>
+                <label>{{ task }}</label>
+                <input type="text">
+                <button class="edit">Edit</button>
+                <button class="delete">Delete</button>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <script>
+        // Your JavaScript logic here
+    document.addEventListener("DOMContentLoaded", function() {
+    let taskInput = document.getElementById("new-task");
+    let addButton = document.getElementById("add-button");
+    let incompleteTaskHolder = document.getElementById("incomplete-tasks");
+    let completedTasksHolder = document.getElementById("completed-tasks");
+
+    function createNewTaskElement(taskString) {
+        let listItem = document.createElement("li");
+        let checkBox = document.createElement("input");
+        let label = document.createElement("label");
+        let editInput = document.createElement("input");
+        let editButton = document.createElement("button");
+        let deleteButton = document.createElement("button");
+
+        label.innerText = taskString;
+        checkBox.type = "checkbox";
+        editInput.type = "text";
+        editButton.innerText = "Edit";
+        editButton.className = "edit";
+        deleteButton.innerText = "Delete";
+        deleteButton.className = "delete";
+
+        listItem.appendChild(checkBox);
+        listItem.appendChild(label);
+        listItem.appendChild(editInput);
+        listItem.appendChild(editButton);
+        listItem.appendChild(deleteButton);
+
+        return listItem;
+    }
+
+    function addTask() {
+        let listItem = createNewTaskElement(taskInput.value);
+
+        if (taskInput.value === "") {
+            return;
+        }
+
+        incompleteTaskHolder.appendChild(listItem);
+        bindTaskEvents(listItem, taskCompleted);
+
+        taskInput.value = "";
+    }
+
+    function editTask() {
+        let listItem = this.parentNode;
+        let editInput = listItem.querySelector('input[type=text]');
+        let label = listItem.querySelector("label");
+        let containsClass = listItem.classList.contains("editMode");
+
+        if (containsClass) {
+            label.innerText = editInput.value;
+        } else {
+            editInput.value = label.innerText;
+        }
+
+        listItem.classList.toggle("editMode");
+    }
+
+    function deleteTask() {
+        let listItem = this.parentNode;
+        let ul = listItem.parentNode;
+        ul.removeChild(listItem);
+    }
+
+    function taskCompleted() {
+        let listItem = this.parentNode;
+        completedTasksHolder.appendChild(listItem);
+        bindTaskEvents(listItem, taskIncomplete);
+    }
+
+    function taskIncomplete() {
+        let listItem = this.parentNode;
+        incompleteTaskHolder.appendChild(listItem);
+        bindTaskEvents(listItem, taskCompleted);
+    }
+
+    function bindTaskEvents(taskListItem, checkBoxEventHandler) {
+        let checkBox = taskListItem.querySelector("input[type=checkbox]");
+        let editButton = taskListItem.querySelector("button.edit");
+        let deleteButton = taskListItem.querySelector("button.delete");
+
+        editButton.onclick = editTask;
+        deleteButton.onclick = deleteTask;
+        checkBox.onchange = checkBoxEventHandler;
+    }
+
+    addButton.addEventListener("click", addTask);
+    addButton.addEventListener("click", ajaxRequest);
+
+    let incompleteTasks = document.querySelectorAll("#incomplete-tasks li");
+    incompleteTasks.forEach(function(task) {
+        bindTaskEvents(task, taskCompleted);
+    });
+
+    let completedTasks = document.querySelectorAll("#completed-tasks li");
+    completedTasks.forEach(function(task) {
+        bindTaskEvents(task, taskIncomplete);
+    });
+
+    function ajaxRequest() {
+        // Implement your AJAX request logic here
+        // This is where you can send data to the server
+    
+    }
+    </script>
+    document.addEventListener("DOMContentLoaded", function() {
+       function addTask() {
+        let listItem = createNewTaskElement(taskInput.value);
+
+        if (taskInput.value === "") {
+            return;
+        }
+
+        incompleteTaskHolder.appendChild(listItem);
+        bindTaskEvents(listItem, taskCompleted);
+
+        taskInput.value = "";
+
+        // AJAX logic to add task
+        $.ajax({
+            url: '/add_task/',  // Replace with your Django view URL
+            method: 'POST',
+            data: {
+                task: listItem.querySelector("label").innerText,
+            },
+            success: function(response) {
+                // Handle successful response if needed
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                // Handle error if needed
+            }
+        });
+    }
+
+    function editTask() {
+        // ... (previous JavaScript code) ...
+
+        // AJAX logic to update task
+        $.ajax({
+            url: '/update_task/',  // Replace with your Django view URL
+            method: 'POST',
+            data: {
+                task_id: listItem.id,
+                new_task_text: editInput.value,
+            },
+            success: function(response) {
+                // Handle successful response if needed
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                // Handle error if needed
+            }
+        });
+    }
+
+    // ... (rest of the JavaScript code) ...
+});
+    </script>
+});
+    </script>
+</body>
+</html>
