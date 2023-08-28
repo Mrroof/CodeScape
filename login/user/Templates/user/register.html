@@ -1,12 +1,12 @@
 {% extends "user/index.html" %}
 {% load crispy_forms_tags %}
-
 {% block start %}
+
 <div class="content-section col-md-8 col-md-offset-2">
   <form method="POST" style="border: 1px solid black; margin: 4%; padding:10%; border-radius:1%;">
     {% csrf_token %}
     <fieldset class="form-group">
-     
+      {{ form|crispy}}
     </fieldset>
     <center>
       <button style="background: black; padding:2%; font-size: 2rem; color:white;" class="btn btn-outline-info" type="submit"><span class="glyphicon glyphicon-check"></span> &nbsp; sign up</button>
@@ -16,29 +16,3 @@
   </form>
 </div>
 {% endblock start %}
-In this template, {{ form|crispy }} renders the form fields using crispy forms.
-
-Update your register view to use the registration.html template when rendering the registration form:
-python
-Copy code
-from django.shortcuts import render
-from .forms import UserRegistrationForm
-
-def register(request):
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            # Handle successful registration (e.g., redirect)
-    else:
-        form = UserRegistrationForm()
-
-    return render(request, 'user/registration.html', {'form': form, 'title': 'register here'})
-Make sure you've defined UserRegistrationForm in your forms.py file.
-
-With these changes, the registration.html template should display the form fields for user registration. If you still face issues or have any questions, feel free to ask for further assistance.
-
-
-
-
-
