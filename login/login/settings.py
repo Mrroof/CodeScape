@@ -1,3 +1,4 @@
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 """
 Django settings for login project.
 
@@ -144,4 +145,3 @@ EMAIL_HOST_PASSWORD = "armadillo"
 
 
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
