@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UENR WEATHER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0096FF	 ;
+        }
+        .weather-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #D3D3D3;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .weather-icon {
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="weather-container mt-5">
+    <h2 class="mb-4 text-center">UENR WEATHER</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" name="city" class="form-control" placeholder="Enter city" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Get Weather</button>
+    </form>
+    {% if city %}
+    <div class="mt-4 text-center">
+        <h3 class="mb-3">{{ city }}</h3>
+        <p class="weather-icon"><i class="fas fa-sun"></i></p>
+        <p class="lead">{{ weather }}</p>
+        <p class="lead">{{ temp }}°F</p>
+    </div>
+    {% endif %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
