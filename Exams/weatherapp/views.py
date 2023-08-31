@@ -9,12 +9,14 @@ def weather_view(request):
         weather_data = requests.get(
             f"https://api.openweathermap.org/data/2.5/weather?q={user_input}&units=imperial&APPID={api_key}")
 
-        if weather_data.json()['cod'] == '404':
-            weather = "No City Found"
-            temp = ""
+        if weather_data.status_code == 200:
+            weather_data_json = weather_data.json()
+            weather = weather_data_json['weather'][0]['main']
+            temp = round(weather_data_json['main']['temp'])
+            city = user_input
         else:
-            weather = weather_data.json()['weather'][0]['main']
-            temp = round(weather_data.json()['main']['temp'])
+            weather = "Error fetching weather data"
+            temp = ""
             city = user_input
 
         return render(request, 'weatherapp/weather.html', {'city': city, 'weather': weather, 'temp': temp})
