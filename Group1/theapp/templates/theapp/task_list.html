@@ -44,6 +44,7 @@
         <div class="task-controls">
             <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
             <span class="handle">&nbsp;&#10247;</span>
+            <input type="checkbox" name="prioritize" {% if task.prioritize %}checked{% endif %}>
         </div>
     </div>
 
@@ -79,6 +80,24 @@
     }
 
     document.ondrop = reordering
+    document.querySelectorAll('input[name="prioritize"]').forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            // Get the task's ID from the parent element
+            var taskId = this.closest('.task-wrapper').getAttribute('data-position');
+            // Send an AJAX request to update the task's "prioritize" status
+            // You can use fetch or another library to make the request
+            fetch('/update-prioritize/' + taskId + '/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrf_token,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ prioritize: this.checked }),
+            }).then(function (response) {
+                // Handle the response as needed
+            });
+        });
+    });
 </script>
 
 {% endblock content %}
