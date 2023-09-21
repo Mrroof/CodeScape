@@ -15,5 +15,7 @@ urlpatterns =[
     path('task-delete/<int:pk>/', DeleteView.as_view(), name='task-delete'),
     path('task-reorder/', TaskReorder.as_view(), name='task-reorder'),
     path('update-prioritize/<int:task_id>/', views.update_prioritize, name='update-prioritize'),
+    path('register/', views.registration_view, name='register'),
+
 
 ]
