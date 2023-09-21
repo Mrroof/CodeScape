@@ -108,6 +108,23 @@ def update_prioritize(request, task_id):
             return JsonResponse({'success': False, 'error': 'Task not found'})
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
+from django.contrib.auth import login
+from django.contrib.auth.models import User  # Add this import
+from django.shortcuts import render, redirect
+from .forms import RegistrationForm
+
+def registration_view(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Log in the user after registration
+            login(request, user)
+            return redirect('home')  # Redirect to your home page or any desired page
+    else:
+        form = RegistrationForm()
+    return render(request, 'registration/register.html', {'form': form})
+
 class TaskReorder(View):
     def post(self, request):
         form = PositionForm(request.POST)
