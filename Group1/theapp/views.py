@@ -9,6 +9,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
+from django.http import JsonResponse
+import json
+
 # Imports for Reordering Feature
 from django.views import View
 from django.shortcuts import redirect
@@ -93,6 +96,17 @@ class DeleteView(LoginRequiredMixin, DeleteView):
     def get_queryset(self):
         owner = self.request.user
         return self.model.objects.filter(user=owner)
+
+def update_prioritize(request, task_id):
+    if request.method == 'POST':
+        try:
+            task = Task.objects.get(pk=task_id)
+            task.prioritize = json.loads(request.body)['prioritize']
+            task.save()
+            return JsonResponse({'success': True})
+        except Task.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Task not found'})
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 class TaskReorder(View):
     def post(self, request):
