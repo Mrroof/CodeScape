@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'distro', 
 ]
 
 MIDDLEWARE = [
@@ -46,7 +51,9 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware', 
+    'allauth.account.middleware.AccountMiddleware',
+
 ]
 
 ROOT_URLCONF = 'hurricane.urls'
@@ -121,3 +128,52 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+# Set the email as the unique identifier for users.
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
+
+# Configure email settings for sending verification emails.
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = [
+    'smtp.gmail.com',
+    'smtp.mail.yahoo.com',
+    'smtp.live.com',
+    'smtp.aol.com',
+    'smtp.mail.me.com',
+    ]  # Replace with your SMTP server details.
+
+EMAIL_PORT = 587  # Replace with your SMTP server's port.
+EMAIL_USE_TLS = True  # Use TLS if your SMTP server requires it.
+EMAIL_HOST_USER = 'rulej31@gmail.com'  # Replace with your email.
+EMAIL_HOST_PASSWORD = 'Aboagye9'  # Replace with your email password.
+DEFAULT_FROM_EMAIL = 'rulej31@gmail.com'  # Replace with your email.
+
+
+
+# Include the 'allauth' URLs in your project's URL configuration.
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_REDIRECT = '/'
+
+# Specify the templates for 'allauth'.
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+ACCOUNT_EMAIL_CONFIRMATION_COOLDOWN = 1800
+
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = LOGIN_REDIRECT_URL
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = None
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+
+# Define your email templates.
+ACCOUNT_EMAIL_CONFIRMATION_SIGNUP_MESSAGE = 'allauth/email/confirmation_signup_message.txt'
+ACCOUNT_EMAIL_CONFIRMATION_SIGNUP_SUBJECT = 'allauth/email/confirmation_signup_subject.txt'
