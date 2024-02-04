@@ -16,4 +16,4 @@ class Tip(models.Model):
 class UserProfile(models.model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
-    profile_picture = models.ImageField( upload_to= 'prifile _pics',blank=Cascade)
+    profile_picture = models.ImageField( upload_to= 'profile_pics',blank=True)
