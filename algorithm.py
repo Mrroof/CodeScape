@@ -1,21 +1,15 @@
-def Jumble(result:list):
-    output:str = ''
-    for letters in result:
-        for letter in letters:
-            output += letter
-        output += ','
-    return output[:len(output)-2]
+from itertools import permutations
 
-def Jumble(letters:str):
-    Result = []
-    BI = []
-    for x in range(2):
-        BI.append(letters[x])
+def find_permutation(input_string):
+    permuted_list = list(permutations(input_string))
+
+    permuted_string = [''.join(perm) for perm in permuted_list]
+
+    return permuted_string
 
 
-    Result.append(BI.copy())
-    BI.reverse()
-    Result.append(BI)
-    return FormatResult(Result)
 
-?
+
+input_str = 'SERIOUS'
+results = find_permutation(input_str)
+print(results)
