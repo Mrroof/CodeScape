@@ -4,14 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Number Guessing Game</title>
-  <link rel="stylesheet" href="design.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Guess the Number!</h1>
-  <p>I'm thinking of a number between 1 and 100. Can you guess it?</p>
-  <input type="number" id="guess" placeholder="Enter your guess">
-  <button id="submit-guess">Guess</button>
-  <p id="message"></p>
-  <script src="logic.js"></script>
+  <h1>Number Guessing Game</h1>
+  <div class="container">
+    <p>Guess a number between 1 and 100:</p>
+    <input type="number" id="guessInput">
+    <button onclick="checkGuess()">Submit Guess</button>
+    <p id="message"></p>
+    <button onclick="resetGame()">Reset Game</button>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
