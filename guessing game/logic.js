@@ -1,5 +1,5 @@
 // Generate a random number between 1 and 100
-const randomNumber = Math.floor(Math.random() * 100) + 1;
+const randomNumber = Math.floor(Math.random() * 10) + 1;
 
 // Get references to the input field and message area
 const guessInput = document.getElementById('guessInput');
@@ -13,7 +13,8 @@ function checkGuess() {
   // Check if the guess is correct
   if (userGuess === randomNumber) {
     message.textContent = 'Congratulations! You guessed the correct number!';
-    message.style.color = 'green';
+    message.style.color = 'black';
+    message.style.fontWeight = bold; 
     guessInput.disabled = true;
   } else if (userGuess < randomNumber) {
     message.textContent = 'Too low! Try a higher number.';
