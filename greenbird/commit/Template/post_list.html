@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <tltle>Learning</tltle>
+</head>
+<body>
+    <h1>Blog Posts </h1>
+    <ul>{% for post in posts 0%}
+    <li>
+        <h2>{{ post.title}}</h2>
+        <p>{{ post.content}}</p>
+    </li>
+    {% endfor %}
+    </ul>
+
+</body>
