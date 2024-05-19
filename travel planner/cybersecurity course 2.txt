@@ -1,0 +1,14 @@
+cybersecurity roles, processes and OS security
+
+
+I look for technical skills, including operating system knowledge, such as Linux, Mac OS, 
+Windows, database knowledge, cross-site scripting, malware, DDoS, and cybersecurity knowledge 
+in general, especially around firewalls and antivirus.
+We can define IT security as the practice of defending computer servers, mobile devices, 
+electronic systems, networks, its data from malicious attacks. This term can also be known as 
+information security or cybersecurity on field.
+ We're going to talk about frameworks, we're going to talk about best practices, and here are just 
+a good differentiation between best practices, baseline frameworks, normative and compliance
+We'll have, for example, best practices, we will have a baseline, or we will have framework.
+ A good example of framework is copied, or good example of best practices in some cases spraying 
+worried bent up your business is ITIL.
