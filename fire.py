@@ -1,5 +1,9 @@
-import random 
-upper = 700
-lower = 0
-x= random.randint(lower, upper)
-print (x)
+global_var = 'i am global'
+
+def globe():
+    global global_var 
+    global_var = "i have been modied"
+
+globe()
+print(global_var)
+
