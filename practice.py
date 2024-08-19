@@ -24,3 +24,6 @@ def calculate_area(radius):
     Area = pi * radius ** 2
     return Area
 print(f'printing the area of a circle {calculate_area(0)}') 
+
+
+print "Hi"
