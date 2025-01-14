@@ -10,7 +10,7 @@ print("Number of missing values before imputation:")
 print(titanic.isnull().sum())
 
 # Use the backward fill method to fill missing values in the 'age' column
-titanic['age'].fillna(titanic['age'].mean(), inplace=True)
+titanic['age'].fillna(titanic['age'].bfill(), inplace=True)
 
 # After filling, display the count of missing values for each column again
 print("\nNumber of missing values after imputation:")
