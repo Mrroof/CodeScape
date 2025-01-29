@@ -3,7 +3,7 @@ import numpy as np
 import seaborn as sns
 from sklearn.preprocessing import RobustScaler
 
-# Load the Titanic dataset
+# Load the Titanic dataset6
 titanic_df = sns.load_dataset('titanic').dropna()
 
 # Initialize the RobustScaler
