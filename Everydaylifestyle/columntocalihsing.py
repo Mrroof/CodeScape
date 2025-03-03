@@ -11,5 +11,6 @@ df = pd.DataFrame(data=np.c_[data['data'], data['target']],
                   columns=data['feature_names'] + ['MedHouseValue'])
 
 # TODO: Add a new column 'PopHouseValue' describing 'Population' divided by 'MedHouseValue'
+df['PopHouseValue'] = df['Population'] / df['MedHouseValue']
 
 print(df.head())
